@@ -1,9 +1,10 @@
-#!/usr/bin/env python3.5
+#!/usr/bin/env python3.7
 
 import os
 import socket
 import selectors
 import tempfile
+import time
 import threading
 from argparse import ArgumentParser
 import i3ipc
@@ -99,7 +100,19 @@ if __name__ == '__main__':
         focus_watcher = FocusWatcher()
         focus_watcher.run()
     else:
+        i3 = i3ipc.Connection()
+        focused = i3.get_tree().find_focused()
         client_socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
         client_socket.connect(SOCKET_FILE)
-        client_socket.send(b'switch')
+
+        if focused.fullscreen_mode: 
+            client_socket.send(b'switch')
+            i3.get_tree().find_focused().command('fullscreen toggle')
+            time.sleep(0.1)
+            i3.get_tree().find_focused().command('fullscreen toggle')
+
+        else: 
+
+            client_socket.send(b'switch')
+
         client_socket.close()
