@@ -108,7 +108,7 @@ if __name__ == '__main__':
         if focused.fullscreen_mode: 
             i3.get_tree().find_focused().command('fullscreen toggle')
             client_socket.send(b'switch')
-            time.sleep(0.01)
+            time.sleep(.1)
             i3.get_tree().find_focused().command('fullscreen toggle')
 
         else: 
