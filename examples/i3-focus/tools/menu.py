@@ -12,7 +12,7 @@ class Menu:
 
     def show_menu(self, items):
         menu_input = bytes(str.join('\n', items), 'UTF-8')
-        menu_cmd = [self._menu] + ['-l', str(len(items))] + ['-i', '-F'] + self._menu_args
+        menu_cmd = [self._menu] + ['-l', str(len(items)), '-i'] + self._menu_args
         menu_result = check_output(menu_cmd, input=menu_input)
         return menu_result.decode().strip()
 
