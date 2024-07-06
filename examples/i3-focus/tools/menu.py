@@ -3,7 +3,6 @@ from subprocess import check_output
 import time
 from . import Lists, App
 
-
 class Menu:
     def __init__(self, i3, menu, menu_args):
         self._i3 = i3
@@ -47,7 +46,7 @@ class Menu:
 
 
     def _get_titles_with_app_prefix(self, containers_info):
-        return list(map(lambda i: App(i).get_title() + ': ' + i["window_title"], containers_info))
+        return list(map(lambda i: App(i).get_title() + ': ' + i["window_title"].rstrip(), containers_info))
 
     def _add_uniqu_suffix(self, titles):
         counters = dict()
