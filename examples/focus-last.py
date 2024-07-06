@@ -114,6 +114,7 @@ if __name__ == '__main__':
 
         else: 
 
+            # i3.get_tree().find_focused().command('split vertical')
             client_socket.send(b'switch')
 
         client_socket.close()
